@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import Header from './components/Header';
+import NewsSection from './components/NewsSection';
+import NewPostSection from './components/NewPostSection';
+import Footer from './components/Footer';
+import PostInformation from './components/PostInformation';
+import { Routes, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme({
+  typography: {
+    fontFamily: 'DM Sans, sans-serif',
+  },
+});
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header></Header>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <NewsSection></NewsSection>
+              <NewPostSection></NewPostSection>
+            </div>
+          }
+        ></Route>
+        <Route path='/:id' element={<PostInformation/>}></Route>
+      </Routes>
+      <Footer></Footer>
+    </ThemeProvider>
   );
 }
 
